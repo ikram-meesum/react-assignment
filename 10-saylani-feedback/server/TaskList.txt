@@ -1,0 +1,18 @@
+TODAY TASK 05-07-24
+
+1. Set the navbar 
+2. Show alert message on login screen
+3. Set the form with
+4. Show alert message on signup form
+5. Show toast on signup
+6. Feedback form completed
+7. Enable react hot toast 
+
+TOMORROW TASK 06-07-24
+
+1. Dashboar admin login
+2. Show all comments
+3. Create Teacher Page
+
+
+
