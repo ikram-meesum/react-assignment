@@ -8,6 +8,7 @@ import Comment from "./pages/Comment.jsx";
 import Dashboard from "./pages/Dashboard/Home.jsx";
 import RegisterStudent from "./pages/Dashboard/RegisterStudent.jsx";
 import StudentFeedback from "./pages/Dashboard/StudentFeedback.jsx";
+import Teacher from "./pages/Dashboard/Teacher.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/student-feedback",
     element: <StudentFeedback />,
+  },
+  {
+    path: "/dashboard/teacher",
+    element: <Teacher />,
   },
 ]);
 

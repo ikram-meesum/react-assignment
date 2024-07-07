@@ -3,10 +3,26 @@ import { useForm } from "react-hook-form";
 import Navbar from "./Navbar";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
 
 const StudentForm = () => {
+  const [allTeacher, setAllTeacher] = useState([]);
   // const id = useParams();
   // console.log(id);
+
+  async function getData() {
+    try {
+      const res = await axios("http://localhost:5000/teacher");
+      const data = await res.data;
+      setAllTeacher(data);
+    } catch (err) {
+      console.log("Error occured from getdata method: ", err);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const {
     register,
@@ -18,26 +34,32 @@ const StudentForm = () => {
   const onSubmit = (data) => {
     console.log(data);
 
-    axios
-      .post("http://localhost:5000/student", {
-        sname: data.sname,
-        fname: data.fname,
-        email: data.email,
-        mobile: data.mobile,
-        cnic: data.cnic,
-        address: data.address,
-        password: data.password,
-      })
-      .then(
-        (response) => {
-          console.log(response);
-          // alert("Signup Successfully!");
-          toast.success("Successfully toasted!");
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+    if (data.teacher == "Select Teacher") {
+      alert("Please seleect a teacher");
+    } else {
+      axios
+        .post("http://localhost:5000/student", {
+          sname: data.sname,
+          fname: data.fname,
+          email: data.email,
+          mobile: data.mobile,
+          cnic: data.cnic,
+          address: data.address,
+          password: data.password,
+          teacher_id: data.teacher,
+        })
+        .then(
+          (response) => {
+            console.log(response);
+            // alert("Signup Successfully!");
+            reset();
+            toast.success("Student inserted successfully!");
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
+    }
   };
   return (
     <>
@@ -179,7 +201,7 @@ const StudentForm = () => {
             {errors.roll && <p className="text-red-500">Roll No Required.</p>}
           </div>
 
-          <div className="md:col-span-6">
+          <div className="md:col-span-3">
             <label>Address</label>
             <input
               type="text"
@@ -191,6 +213,27 @@ const StudentForm = () => {
               <p className="text-red-500">Enter the permenant address.</p>
             )}
           </div>
+
+          <div className="md:col-span-3">
+            <label>Select Teacher</label>
+            <select
+              {...register("teacher")}
+              className="bg-gray-50 border h-10 mt-1 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value={"Select Teacher"}>{"Select Teacher"}</option>
+              {allTeacher.map((teacher, ind) => {
+                return (
+                  <option key={ind} value={teacher._id}>
+                    {teacher.teacher}
+                  </option>
+                );
+              })}
+            </select>
+            {errors.teacher && (
+              <p className="text-red-500">Select a ranking.</p>
+            )}
+          </div>
+
           <div className="">
             <div className="">
               <button
@@ -198,10 +241,10 @@ const StudentForm = () => {
                 className={
                   // !pImage
                   //   ? "bg-gray-200 text-slate-400 font-bold py-2 px-6 rounded"
-                  `bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded mt-2`
+                  `bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 text-sm rounded mt-2`
                 }
               >
-                SIGNUP
+                ADD STUDENT
               </button>
             </div>
           </div>

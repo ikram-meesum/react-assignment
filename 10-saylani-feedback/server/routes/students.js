@@ -15,12 +15,15 @@ route.post("/", async (req, res) => {
     fname: req.body.fname,
     email: req.body.email,
     password: req.body.password,
-    mobile: req.body.mobile,    
+    mobile: req.body.mobile,
     cnic: req.body.cnic,
     batch: req.body.batch,
     rollno: req.body.rollno,
     address: req.body.address,
+    teacher_id: req.body.teacher_id,
   });
+
+  console.log("server: ", studentData);
 
   try {
     const result = await studentData.save();

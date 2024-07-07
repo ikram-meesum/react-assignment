@@ -15,13 +15,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
-const studentRoute = require("./routes/students");  
-const commentRoute = require("./routes/comment"); 
+const studentRoute = require("./routes/students");
+const commentRoute = require("./routes/comment");
+const teacherRoute = require("./routes/teacher");
 
 // All Routes
 app.use("/student", studentRoute);
 app.use("/login", studentRoute);
 app.use("/comment", commentRoute);
+app.use("/teacher", teacherRoute);
 
 app.listen(5000, () => console.log("Example app listening on port 5000!"));
-

@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  let location = useLocation();
+
   return (
     <>
       <nav className="bg-gray-800">
@@ -22,27 +24,39 @@ const Navbar = () => {
                 <div className="flex space-x-4">
                   <Link
                     to={"/dashboard"}
-                    className="px-3 py-2 text-sm font-medium text-white"
+                    className={"px-3 py-2 text-sm font-medium text-white"}
                     aria-current="page"
                   >
-                    Dashboard Student Feedback
+                    Dashboard
                   </Link>
                   <Link
                     to={"/dashboard/register-student"}
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    className={
+                      location.pathname == `/dashboard/register-student`
+                        ? "bg-slate-600 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                        : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }
                   >
                     Student Registration
                   </Link>
 
                   <Link
-                    to={"/dashboard/"}
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    to={"/dashboard/teacher"}
+                    className={
+                      location.pathname == `/dashboard/teacher`
+                        ? "bg-slate-600 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                        : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }
                   >
                     Teacher List
                   </Link>
                   <Link
                     to={"/dashboard/student-feedback"}
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    className={
+                      location.pathname == `/dashboard/student-feedback`
+                        ? "bg-slate-600 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                        : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }
                   >
                     Student Feedback
                   </Link>

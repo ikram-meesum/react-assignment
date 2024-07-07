@@ -4,11 +4,8 @@ let commentSchema = mongoose.Schema(
   {
     comments: { type: String },
     studentId: { type: mongoose.Schema.Types.ObjectId },
-    // studentId: new mongoose.Types.ObjectId(),
     rating: { type: String },
-    teacher: { type: String, default: "Rizwan Jamal" },
-
-    //   depart_id: { type: mongoose.Schema.Types.ObjectId, ref: "Fcpsward" },
+    teacher: { type: String },
   },
   { timestamps: true }
 );
